@@ -71,7 +71,7 @@
                 </div>
 
                 <div>
-                    <button type="submit" class="bg-blue-500 text-white pw-4 py-3 rounded
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white pw-4 py-3 rounded
                         font-medium w-full">Register</button>
                 </div>
             </form>
