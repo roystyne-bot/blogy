@@ -12,7 +12,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.index');
+        $posts = Post::paginate(20);
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -23,12 +24,12 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $validated = $request -> validate([
-            'body' => 'required|max:255'
+            'body' => 'required'
         ]);
 
-        Post::create($validated);
-
-        return redirect()->route('posts.index');
+        $request->user()->posts()->create($validated);
+        
+        return back();
     }
 
     /**
