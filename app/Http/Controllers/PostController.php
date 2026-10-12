@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -16,18 +17,18 @@ class PostController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request -> validate([
+            'body' => 'required|max:255'
+        ]);
+
+        Post::create($validated);
+
+        return redirect()->route('posts.index');
     }
 
     /**

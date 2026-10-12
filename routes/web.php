@@ -9,14 +9,18 @@ use App\Http\Controllers\PostController;
 
 
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/logout', [LogoutController::class, 'logOut'])->name('logout');
+
+    Route::post('/posts', [PostController::class, 'store']);
 });
+
+Route::get('/', function () {
+    return view('home');
+})->name('home');
+
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -25,6 +29,6 @@ Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
     Route::post('/register', [RegisterController::class, 'store']);
 
-    Route::get('/posts', [PostController::class, 'index'])->name('posts');
-
 });
+
+ Route::get('/posts', [PostController::class, 'index'])->name('posts');
