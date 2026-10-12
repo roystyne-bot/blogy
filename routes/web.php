@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostLikeController;
 
 
 
@@ -15,6 +16,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [LogoutController::class, 'logOut'])->name('logout');
 
     Route::post('/posts', [PostController::class, 'store']);
+
+    Route::post('/posts/{post}/likes', [PostLikeController::class, 'store'])->name('posts.likes');
+    Route::delete('/posts/{post}/likes', [PostLikeController::class, 'destroy'])->name('posts.likes');
 });
 
 Route::get('/', function () {
@@ -31,4 +35,4 @@ Route::middleware('guest')->group(function () {
 
 });
 
- Route::get('/posts', [PostController::class, 'index'])->name('posts');
+Route::get('/posts', [PostController::class, 'index'])->name('posts');
