@@ -10,7 +10,7 @@
                 </div>
             @endif
 
-            
+
             <form action="{{ route('login') }}" method="post">
                 @csrf
 
@@ -36,6 +36,13 @@
                             {{ $message }}
                         </div>
                     @enderror
+                </div>
+
+                <div class="mb-4">
+                  <div>
+                    <input type="checkbox" name="remember" id="remember" class="mr-2">
+                    <label for="remember">Remember me</label>
+                </div>
                 </div>
 
                 <div>
