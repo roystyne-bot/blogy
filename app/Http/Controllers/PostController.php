@@ -39,7 +39,8 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $post = Post::find($id);
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -47,7 +48,7 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+     
     }
 
     /**

@@ -30,6 +30,8 @@ Route::get('/', function () {
 
 Route::get('/users/{user:username}/post', [UserPostController::class, 'index'])->name('users.posts');
 
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');

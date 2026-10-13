@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
+
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -11,12 +14,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
-       
+     
         return view('dashboard');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-   
+
 }
