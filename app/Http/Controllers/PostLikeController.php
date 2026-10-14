@@ -12,26 +12,28 @@ class PostLikeController extends Controller
     /**
      * Display a listing of the resource.
      */
-  
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Post $post, Request $request)
     {
-        
+
         $alreadyLiked = $post->likedBy($request->user());
 
-        if ($alreadyLiked){
-           return response(null, 409);
+        if ($alreadyLiked) {
+            return response(null, 409);
         }
 
         $post->likes()->create([
             'user_id' => $request->user()->id
         ]);
 
-      
-        Mail::to($post->user)->send(new PostLiked(auth()->user(), $post));
+        if (!$post->likes()->onlyTrashed()->where('user_id', $request->user()->id)->count()) {
+            Mail::to($post->user)->send(new PostLiked(auth()->user(), $post));
+        }
+
 
         return back();
     }
@@ -40,8 +42,8 @@ class PostLikeController extends Controller
      */
     public function destroy(Post $post, Request $request)
     {
-       $request->user()->likes()->where('post_id', $post->id)->delete();
+        $request->user()->likes()->where('post_id', $post->id)->delete();
 
-       return back();
+        return back();
     }
 }
